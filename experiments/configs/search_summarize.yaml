@@ -1,0 +1,15 @@
+agent_name: search_summarize
+mode: search_summarize
+model: ""
+temperature: 0
+budget: low
+settings_path: config/settings.yaml
+cache_dir: outputs/cache
+use_hooks: false
+hooks:
+  raes_evidence_gate: false
+search_summarize:
+  search_results: 8
+  fetch_results: 4
+  max_context_chars: 24000
+  max_tokens: 2048

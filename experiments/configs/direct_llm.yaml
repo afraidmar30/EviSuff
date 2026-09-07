@@ -1,0 +1,9 @@
+agent_name: direct_llm
+mode: direct_llm
+model: ""
+temperature: 0
+budget: low
+settings_path: config/settings.yaml
+use_hooks: false
+hooks:
+  raes_evidence_gate: false

@@ -1,0 +1,8 @@
+agent_name: dry_run
+mode: dry_run
+model: none
+temperature: 0
+budget: low
+use_hooks: false
+hooks:
+  raes_evidence_gate: true

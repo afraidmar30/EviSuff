@@ -1,0 +1,80 @@
+agent_name: searchclaw_raes_light_gate
+mode: searchclaw_raes_gate
+model: ""
+temperature: 0
+budget: low
+max_turns: 10
+budgets:
+  web_search: 4
+  web_fetch: 4
+  academic_search: 1
+  news_search: 1
+settings_path: config/settings.yaml
+cache_dir: outputs/cache
+tools:
+  disabled_tools:
+    - research_plan
+    - ask_user
+  web_search_default_results: 5
+  web_search_max_results: 8
+  academic_search_default_results: 3
+  academic_search_max_results: 5
+  news_search_default_results: 3
+  news_search_max_results: 5
+use_hooks: true
+abort_on_retrieval_failure: true
+continue_on_external_failure: true
+hooks:
+  raes_evidence_gate: true
+
+fast_instructions: |
+  You are collecting efficient RAES training trajectories. Prefer speed and direct source grounding.
+  Never search for RAES, benchmark wording, "reliable public evidence boundary", "public evidence boundary", "evidence boundary", "single-source verification task", "medium data_analysis task", or other task-meta phrases unless the named target itself is RAES.
+  Extract the target entity/method/tool/dataset from the question and search that target plus direct locators such as arXiv, official docs, GitHub, dataset page, leaderboard, or release notes.
+  Your first web_search query should be only the target entity plus one direct locator, e.g. "statsmodels documentation release notes", "scikit-learn reproducibility examples", "XGBoost documentation release notes", "HotpotQA leaderboard".
+  If a search returns no results, immediately simplify the next query to the target name plus "official documentation" or "GitHub"; do not retry benchmark phrases.
+  Prefer fetching URLs returned by web_search. Do not invent or guess many URLs after empty search results; only fetch a guessed official URL when it is obvious and high-confidence.
+  Use at most two focused search rounds before fetching. Fetch/read the best 1-3 direct sources, then answer.
+  For source-boundary questions, answer what the direct public sources support and what remains uncertain; do not over-search for the benchmark's hidden intent.
+
+trajectory:
+  capture_full_text: true
+  max_tool_result_chars: 12000
+
+training_export:
+  format: messages_jsonl
+
+raes_gate:
+  enabled: true
+  mode: blind
+  max_gate_iterations: 1
+
+  rule_gate:
+    enabled: true
+    min_sources: 2
+    min_independent_domains: 2
+    require_primary_source: false
+    max_single_domain_ratio: 0.85
+    min_answer_chars: 200
+    fail_fast_on_rule_fail: false
+
+  facet_gate:
+    enabled: false
+    predict_facets: false
+    block_on_missing_critical_facet: false
+
+  citation_gate:
+    enabled: false
+    extract_claims: false
+    block_on_contradicted_claim: false
+    block_on_unsupported_critical_claim: false
+
+  uncertainty_gate:
+    enabled: true
+    require_uncertainty_for_low_evidence: true
+    require_conflict_disclosure: true
+
+  stop_gate:
+    enabled: true
+    allow_abstain: true
+    final_with_uncertainty_when_budget_exhausted: true

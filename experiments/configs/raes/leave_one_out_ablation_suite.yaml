@@ -1,0 +1,19 @@
+runs:
+  - id: A7
+    name: searchclaw_citation_prompt_only
+    config: experiments/configs/raes/searchclaw_citation_prompt_only.yaml
+  - id: A2
+    name: searchclaw_full_wo_rule_gate
+    config: experiments/configs/raes/searchclaw_full_wo_rule_gate.yaml
+  - id: A3
+    name: searchclaw_full_wo_facet_gate
+    config: experiments/configs/raes/searchclaw_full_wo_facet_gate.yaml
+  - id: A4
+    name: searchclaw_full_wo_citation_gate
+    config: experiments/configs/raes/searchclaw_full_wo_citation_gate.yaml
+  - id: A5
+    name: searchclaw_full_wo_uncertainty_gate
+    config: experiments/configs/raes/searchclaw_full_wo_uncertainty_gate.yaml
+  - id: A6
+    name: searchclaw_full_wo_stop_controller
+    config: experiments/configs/raes/searchclaw_full_wo_stop_controller.yaml

@@ -1,0 +1,48 @@
+agent_name: searchclaw_full_wo_stop_controller
+mode: searchclaw_raes_gate
+model: ""
+temperature: 0
+budget: medium
+settings_path: config/settings.yaml
+cache_dir: outputs/cache
+use_hooks: true
+hooks:
+  raes_evidence_gate: true
+
+raes_gate:
+  enabled: true
+  mode: blind
+  max_gate_iterations: 3
+  rule_gate:
+    enabled: true
+    min_sources: 3
+    min_independent_domains: 2
+    require_primary_source: true
+    max_single_domain_ratio: 0.7
+    require_recent_for_current_tasks: true
+    min_answer_chars: 300
+    fail_fast_on_rule_fail: true
+  facet_gate:
+    enabled: true
+    predict_facets: true
+    use_gold_facets: false
+    block_on_missing_critical: true
+    block_on_missing_critical_facet: true
+    max_predicted_facets: 6
+  citation_gate:
+    enabled: true
+    extract_claims: true
+    block_on_contradicted: true
+    block_on_contradicted_claim: true
+    block_on_unsupported_critical: true
+    block_on_unsupported_critical_claim: true
+    max_claims: 12
+  uncertainty_gate:
+    enabled: true
+    require_conflict_disclosure: true
+    require_uncertainty_for_low_evidence: true
+    require_time_boundary_for_current_tasks: true
+  stop_controller:
+    enabled: false
+    allow_abstain: true
+    final_with_uncertainty_when_budget_exhausted: true

@@ -1,0 +1,10 @@
+agent_name: react_agent
+mode: react_agent
+model: ""
+temperature: 0
+budget: medium
+settings_path: config/settings.yaml
+cache_dir: outputs/cache
+use_hooks: false
+hooks:
+  raes_evidence_gate: false

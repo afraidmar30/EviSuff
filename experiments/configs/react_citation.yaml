@@ -1,0 +1,11 @@
+agent_name: react_citation
+mode: react_citation
+model: ""
+temperature: 0
+budget: medium
+settings_path: config/settings.yaml
+cache_dir: outputs/cache
+use_hooks: true
+hooks:
+  min_citations: 2
+  raes_evidence_gate: false

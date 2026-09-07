@@ -1,0 +1,14 @@
+agent_name: searchclaw_citation_prompt_only
+mode: searchclaw
+model: ""
+temperature: 0
+budget: medium
+settings_path: config/settings.yaml
+cache_dir: outputs/cache
+use_hooks: true
+hooks:
+  raes_evidence_gate: false
+
+raes_gate:
+  enabled: false
+  citation_prompt_only: true
